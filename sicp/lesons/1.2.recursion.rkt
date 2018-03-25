@@ -1,6 +1,8 @@
 #lang racket/base
 (require rackunit)
 
+; Вычисление факториала линейно итеративный процесс
+
 ;;; (define (factorial n)
 ;;; 	(fact-iter 1 1 n))
 

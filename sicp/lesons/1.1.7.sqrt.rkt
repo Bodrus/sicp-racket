@@ -6,7 +6,7 @@
 (define (sqrt-iter quess x)
 	(if (good-enough? quess x) 
 			quess
-			(sqrt-iter (inprove quess x) x)))
+			(sqrt-iter (inprove guess x) x)))
 
 (define (inprove guess x)
 	(average guess (/ x guess)))
@@ -14,11 +14,9 @@
 (define (average a b)
 	(/ (+ a b) 2))
 
-(define (good-enough? quess x)
+(define (good-enough? guess x)
 	(< (abs (- (square guess) x)) 0.01))
 
-		;;; (define (good-enough? guess x)
-		;;; 	(< (abs (- (square guess) x)) 0.01))
 
 (define (square x) (* x x))
 

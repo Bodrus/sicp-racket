@@ -1,5 +1,5 @@
 #lang racket/base
-;if another wmodul - (require rackunit "name.file")
+;if another modul - (require rackunit "name.file")
 (require rackunit)
 
 (define (solution a b) (+ a b))
