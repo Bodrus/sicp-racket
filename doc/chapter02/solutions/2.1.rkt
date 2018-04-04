@@ -1,5 +1,5 @@
 #lang racket/base
-(require "../functions/oll.rkt")
+(require "../../../lib/bace.rkt")
 
 (define (number pair) (car pair))
 (define (denom pair) (cdr pair))
