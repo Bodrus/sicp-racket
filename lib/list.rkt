@@ -18,10 +18,23 @@
 ; Экспорт процедуры
 (provide length)
 
-	;соединяем 2 списка в один
+;соединяем 2 списка в один
 (define (append list1 list2)
 	(if (null? list1)
 			list2
 			(cons (car list1) (append (cdr list1) list2))))
 ; Экспорт процедуры
 (provide append)
+
+; Процедура переворота списка
+(define (reverse items)
+	(define (iter list1 new-list)
+		(if (null? list1)
+				new-list
+				(iter (cdr list1) (cons (car list1) new-list))))
+		(iter items null))
+
+; Экспорт процедуры
+(provide reverse)
+
+
