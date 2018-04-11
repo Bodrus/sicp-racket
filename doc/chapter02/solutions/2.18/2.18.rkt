@@ -12,3 +12,6 @@
 		
 
 	(reverse (list 1 2 3 4))
+
+; Экспорт процедуры
+(provide reverse)
