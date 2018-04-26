@@ -5,8 +5,7 @@
 	(if (= n 0)
 		  (car items)
 			(list-ref (cdr items) (- n 1))))
-; Экспорт процедуры
-(provide list-ref)
+
 
 ; Проверяем в итеративном стиле кол-во ел. списка
 (define (length items)
@@ -15,26 +14,62 @@
 				count
 				(iter (cdr it) (+ count 1))))
 	(iter items 0))
-; Экспорт процедуры
-(provide length)
+
 
 ;соединяем 2 списка в один
 (define (append list1 list2)
 	(if (null? list1)
 			list2
 			(cons (car list1) (append (cdr list1) list2))))
-; Экспорт процедуры
-(provide append)
-
-; Процедура переворота списка
-(define (reverse items)
-	(define (iter list1 new-list)
-		(if (null? list1)
-				new-list
-				(iter (cdr list1) (cons (car list1) new-list))))
-		(iter items null))
-
-; Экспорт процедуры
-(provide reverse)
 
 
+; Процедура получения количества листьев в дереве
+(define (count-leaves tree)
+  (cond ((null? tree) 0)
+        ((not (pair? tree)) 1)
+        (else (+ (count-leaves (car tree))
+                 (count-leaves (cdr tree))))))
+
+; Процедура накопления результата применения
+; некоторой операции к последовательности
+(define (accumulate op initial sequence)
+  (if (null? sequence)
+      initial
+      (op (car sequence)
+          (accumulate op initial (cdr sequence)))))
+
+; Процедура отображения передаваемой функции на последовательность,
+; которая возвращает список значений для каждого элемента
+(define (flatmap proc seq)
+  (accumulate append null (map proc seq)))
+
+; Процедура генерации последовательности целых чисел
+; в заданном диапазоне
+(define (enumerate-interval low high)
+  (if (> low high)
+      null
+      (cons low (enumerate-interval (+ low 1) high))))
+
+; Процедура удаления элемента из списка
+(define (remove item sequence)
+  (filter (lambda (x) (not (= x item)))
+          sequence))
+
+; Процедура отображения переданной функции
+; на список. Процедура всегда возвращает #t
+(define (for-each func items)
+  (cond ((null? items) #t)
+        (else (func (car items))
+              (for-each func (cdr items)))))
+
+
+; Экспорт процедур
+(provide list-ref
+         length
+         append
+         count-leaves
+         accumulate
+         flatmap
+         enumerate-interval
+         remove
+         for-each)
